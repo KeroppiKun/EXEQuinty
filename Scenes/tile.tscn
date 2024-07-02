@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://du36tv26l6tll"]
 
-[ext_resource type="Script" path="res://Scenes/tile.gd" id="1_i1uok"]
 [ext_resource type="Texture2D" uid="uid://dlg600b6aifgf" path="res://Resources/tile.png" id="1_i5aph"]
+[ext_resource type="Script" path="res://Scripts/tile.gd" id="1_wrtsm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_500m7"]
 size = Vector2(32, 16)
@@ -10,7 +10,7 @@ size = Vector2(32, 16)
 font_color = Color(0, 0, 0, 1)
 
 [node name="Tile" type="Area2D" groups=["Tile"]]
-script = ExtResource("1_i1uok")
+script = ExtResource("1_wrtsm")
 
 [node name="TileSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_i5aph")

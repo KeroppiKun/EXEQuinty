@@ -7,13 +7,13 @@ enum TILETYPE{
 }
 
 var grid_position = Vector2i.ZERO
-var tileType : TILETYPE
+@export var tileType : TILETYPE
 var walkable = true
 @onready var tileSprite : Sprite2D = $TileSprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_update_tileType()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

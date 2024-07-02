@@ -107,7 +107,7 @@ shape = SubResource("RectangleShape2D_bsexh")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_f5uvh")
 animation = &"Idle"
-frame = 2
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

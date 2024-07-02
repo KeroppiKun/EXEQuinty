@@ -4,6 +4,7 @@ extends Node2D
 @export var BattleGroundTileSize = Vector2i(10,10)
 const Tile_scn = preload("res://Scenes/tile.tscn")
 var tile_array:Array[Tile]
+signal completeCreateStage
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,3 +28,4 @@ func CreateStage():
 			else:
 				tile._set_tileType(tile.TILETYPE.RED)
 			tile_array.push_back(tile)
+	emit_signal("completeCreateStage")
