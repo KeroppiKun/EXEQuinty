@@ -1,0 +1,4 @@
+extends Node
+
+const VERTICAL_TILE_SIZE = 16
+const HORIZONAL_TILE_SIZE = 32

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://du36tv26l6tll"]
+
+[ext_resource type="Script" path="res://Scenes/tile.gd" id="1_i1uok"]
+[ext_resource type="Texture2D" uid="uid://dlg600b6aifgf" path="res://Resources/tile.png" id="1_i5aph"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_500m7"]
+size = Vector2(32, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y57xf"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="Tile" type="Area2D" groups=["Tile"]]
+script = ExtResource("1_i1uok")
+
+[node name="TileSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_i5aph")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_500m7")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -11.0
+offset_right = 20.0
+offset_bottom = 12.0
+label_settings = SubResource("LabelSettings_y57xf")

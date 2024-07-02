@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://br44n8msgtdof"]
+
+[ext_resource type="PackedScene" uid="uid://b86crx7j7w4p6" path="res://Scenes/player.tscn" id="2_aiaww"]
+[ext_resource type="PackedScene" uid="uid://b63jegckkxfgj" path="res://Scenes/battle_ground.tscn" id="2_awpei"]
+
+[node name="Main" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 480.0
+offset_bottom = 320.0
+color = Color(0, 0, 0, 1)
+
+[node name="BattleGround" parent="." instance=ExtResource("2_awpei")]
+position = Vector2(80, 128)
+
+[node name="Player" parent="." instance=ExtResource("2_aiaww")]
+position = Vector2(96, 136)

@@ -1,0 +1,131 @@
+[gd_scene load_steps=14 format=3 uid="uid://b86crx7j7w4p6"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_mnxnj"]
+[ext_resource type="Texture2D" uid="uid://b6x4lireo2hsw" path="res://Resources/Player_Idle.png" id="2_864a0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bsexh"]
+size = Vector2(16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhqy2"]
+atlas = ExtResource("2_864a0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x34j"]
+atlas = ExtResource("2_864a0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scuxu"]
+atlas = ExtResource("2_864a0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6n7x"]
+atlas = ExtResource("2_864a0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f5uvh"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhqy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x34j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scuxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6n7x")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_f0x2t"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hwqeh"]
+_data = {
+"Idle": SubResource("Animation_f0x2t")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_82wdd"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kfeii"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_b0sst"]
+states/End/position = Vector2(899, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_82wdd")
+states/Idle/position = Vector2(345, 100)
+states/Start/position = Vector2(199, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kfeii")]
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_mnxnj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_bsexh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_f5uvh")
+animation = &"Idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hwqeh")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hwqeh")
+}
+tree_root = SubResource("AnimationNodeStateMachine_b0sst")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="GroundCheckRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 32)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="NextTileCheckRayCast" type="RayCast2D" parent="."]
+collision_mask = 3
+collide_with_areas = true

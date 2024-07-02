@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b63jegckkxfgj"]
+
+[ext_resource type="Script" path="res://Scripts/BattleGround.gd" id="1_yr1p1"]
+
+[node name="BattleGround" type="Node2D"]
+script = ExtResource("1_yr1p1")
+BattleGroundTileSize = Vector2i(10, 5)
